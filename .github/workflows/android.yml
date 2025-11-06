@@ -26,19 +26,17 @@ jobs:
 
       - name: Install Android SDK components
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
 
-      # Instala gradle no runner apenas para gerar o wrapper, se ele não existir
+      # Usamos o gradle do sistema só para gerar o wrapper novo
       - name: Install Gradle (for wrapper generation)
         run: |
           sudo apt-get update -y
           sudo apt-get install -y gradle
 
-      - name: Generate Gradle Wrapper if missing
+      - name: Generate/Upgrade Gradle Wrapper to 8.7
         run: |
-          if [ ! -f "./gradlew" ]; then
-            gradle wrapper
-          fi
+          gradle wrapper --gradle-version 8.7
           chmod +x ./gradlew
 
       - name: Build debug APK
