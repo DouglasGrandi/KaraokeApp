@@ -4,6 +4,10 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("com.android.application") version "8.5.2"
+        kotlin("android") version "1.9.24"
+    }
 }
 
 dependencyResolutionManagement {
